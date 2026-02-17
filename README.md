@@ -1,9 +1,12 @@
 # Value-at-Risk Forecasting with Realized Volatility Measures (SPY)
 
 Forecast **one-day-ahead Value-at-Risk (VaR)** for **SPY daily log-returns** at confidence levels **1%, 5%, 10%**, using **intraday-based volatility measures** (realized volatility `rv5` and bipower variation `bv`) and comparing three model families:
-- **GARCH** (with heavy-tailed innovations)
-- **HAR-RV** (multi-horizon realized volatility with optional jump proxy)
-- **Quantile Regression** (direct conditional quantile modeling)
+
+i) **GARCH** (with heavy-tailed innovations)
+
+ii) **HAR-RV** (multi-horizon realized volatility with optional jump proxy)
+
+iii) **Quantile Regression** (direct conditional quantile modeling)
 
 This repository contains the code/notebooks to reproduce the analysis, feature engineering, model selection, and backtesting described in the accompanying report. 
 
@@ -13,7 +16,8 @@ This repository contains the code/notebooks to reproduce the analysis, feature e
 
 - Documents **volatility clustering** and **long-memory** patterns via ACF plots of `|log_ret|` and `log(rv5)`. 
 - Builds interpretable **multi-horizon volatility features** (daily/weekly/monthly) from `log(rv5)`. 
-- Adds an optional **jump proxy**: `J_t = max(rv5_t - bv_t, 0)` to capture discontinuous moves.
+- Adds an optional **jump proxy**: $J_t = \max(\texttt{rv5}_t - \texttt{bv}_t, 0)$
+ to capture discontinuous moves.
 - Uses a realistic, no-look-ahead **chronological split**: first **80% train**, last **20% test**, with **rolling forecasting** during tuning.  
 - Evaluates VaR forecasts with:
   - **Empirical coverage** (violation rate)
